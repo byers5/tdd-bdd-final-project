@@ -135,20 +135,20 @@ class Product(db.Model):
             self.price = Decimal(data["price"])
             if isinstance(data["available"], bool):
                 self.available = data["available"]
-            else:
-                raise DataValidationError(
-                    "Invalid type for boolean [available]: "
-                    + str(type(data["available"]))
-                )
+            #else:
+            #    raise DataValidationError(
+            #        "Invalid type for boolean [available]: "
+            #        + str(type(data["available"]))
+            #    )
             self.category = getattr(Category, data["category"])  # create enum from string
-        except AttributeError as error:
-            raise DataValidationError("Invalid attribute: " + error.args[0]) from error
+        #except AttributeError as error:
+        #    raise DataValidationError("Invalid attribute: " + error.args[0]) from error
         except KeyError as error:
             raise DataValidationError("Invalid product: missing " + error.args[0]) from error
-        except TypeError as error:
-            raise DataValidationError(
-                "Invalid product: body of request contained bad or no data " + str(error)
-            ) from error
+        #except TypeError as error:
+        #    raise DataValidationError(
+        #        "Invalid product: body of request contained bad or no data " + str(error)
+        #    ) from error
         return self
 
     ##################################################
